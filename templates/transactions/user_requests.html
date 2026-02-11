@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% set title = "My Requests" %}
+
+{% block content %}
+  <section class="panel">
+    <h2>My Requests</h2>
+    <div class="row-actions">
+      <a class="btn btn--primary" href="{{ url_for('vendor_request_item') }}">New Request</a>
+      <a class="btn" href="{{ url_for('transactions') }}">Back</a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Urgency</th>
+          <th>Status</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in rows %}
+          <tr>
+            <td>{{ r["id"] }}</td>
+            <td>{{ r["item_name"] }}</td>
+            <td>{{ r["quantity"] }}</td>
+            <td>{{ r["urgency"] }}</td>
+            <td>{{ r["status"] }}</td>
+            <td class="muted">{{ r["created_at"] }}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="6" class="muted">No requests yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}
+
+

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% set title = "Admin Login" %}
+
+{% block content %}
+  <div class="login-card">
+    <div class="login-card__header">Event Management System</div>
+    <form method="post" class="login-form" novalidate>
+      <div class="login-form__row">
+        <label class="pill-label" for="username">User Id</label>
+        <input id="username" name="username" type="text" placeholder="admin / user" autocomplete="username" />
+      </div>
+      <div class="login-form__row">
+        <label class="pill-label" for="password">Password</label>
+        <input id="password" name="password" type="password" placeholder="admin / user" autocomplete="current-password" />
+      </div>
+
+      <div class="login-form__actions">
+        <a class="btn btn--soft" href="{{ url_for('login') }}">Cancel</a>
+        <button class="btn btn--primary" type="submit">Login</button>
+      </div>
+
+      <div class="hint">
+        Default credentials: <b>admin/admin</b> (admin) or <b>user/user</b> (user)
+      </div>
+    </form>
+  </div>
+{% endblock %}
+
+

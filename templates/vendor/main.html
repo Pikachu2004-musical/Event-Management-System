@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% set title = "Vendor - Main Page" %}
+
+{% block content %}
+  <section class="panel">
+    <h2>VENDOR</h2>
+    <p class="muted">Main Page (as in the flow chart)</p>
+
+    <div class="grid">
+      <a class="tile" href="{{ url_for('vendor_items') }}">
+        <div class="tile__title">Your Item</div>
+        <div class="tile__desc">View items and delete.</div>
+      </a>
+      <a class="tile" href="{{ url_for('vendor_item_new') }}">
+        <div class="tile__title">Add New Item</div>
+        <div class="tile__desc">Insert a new item.</div>
+      </a>
+      <a class="tile" href="{{ url_for('transactions') }}">
+        <div class="tile__title">Transaction</div>
+        <div class="tile__desc">User Request list.</div>
+      </a>
+      <a class="tile" href="{{ url_for('vendor_product_status') }}">
+        <div class="tile__title">Product Status</div>
+        <div class="tile__desc">Filter items by status.</div>
+      </a>
+      <a class="tile" href="{{ url_for('vendor_request_item') }}">
+        <div class="tile__title">Request Item</div>
+        <div class="tile__desc">Submit a request (radio + validation).</div>
+      </a>
+      <a class="tile" href="{{ url_for('vendor_view_product') }}">
+        <div class="tile__title">View Product</div>
+        <div class="tile__desc">View all products.</div>
+      </a>
+    </div>
+  </section>
+{% endblock %}
+
+

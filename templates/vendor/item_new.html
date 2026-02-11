@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% set title = "Vendor - Insert Item" %}
+
+{% block content %}
+  <section class="panel">
+    <h2>Insert Item</h2>
+    <form method="post" class="form" novalidate>
+      <div class="form-grid">
+        <div class="muted">Item Name *</div>
+        <input name="name" type="text" placeholder="e.g., Stage Lights" />
+
+        <div class="muted">Status *</div>
+        <div class="radio-row">
+          <label class="inline-label">
+            <input type="radio" name="status" value="available" checked />
+            Available
+          </label>
+          <label class="inline-label">
+            <input type="radio" name="status" value="unavailable" />
+            Unavailable
+          </label>
+          <label class="inline-label">
+            <input type="radio" name="status" value="pending" />
+            Pending
+          </label>
+        </div>
+
+        <div class="muted">Active (Checkbox)</div>
+        <label class="inline-label">
+          <input type="checkbox" name="is_active" checked />
+          Checked = Yes, Unchecked = No
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <a class="btn" href="{{ url_for('vendor_items') }}">Cancel</a>
+        <button class="btn btn--primary" type="submit">Save</button>
+      </div>
+    </form>
+  </section>
+{% endblock %}
+
+

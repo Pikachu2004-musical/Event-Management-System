@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.vscode/
+.idea/
+
+# SQLite DB (generated at runtime)
+data/
+
+# OS / misc
+Thumbs.db
+Desktop.ini
+
+# Uploaded screenshots (optional to keep out of repo)
+WhatsApp Image *.jpeg
+

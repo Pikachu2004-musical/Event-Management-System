@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% set title = "Vendor - View Product" %}
+
+{% block content %}
+  <section class="panel">
+    <h2>View Product</h2>
+    <div class="row-actions">
+      <a class="btn" href="{{ url_for('vendor_main') }}">Back</a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Status</th>
+          <th>Active</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for it in items %}
+          <tr>
+            <td>{{ it["id"] }}</td>
+            <td>{{ it["name"] }}</td>
+            <td>{{ it["status"] }}</td>
+            <td>{{ "Yes" if it["is_active"] else "No" }}</td>
+            <td class="muted">{{ it["created_at"] }}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="5" class="muted">No items.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}
+
+

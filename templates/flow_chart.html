@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% set title = "Flow Chart" %}
+
+{% block content %}
+  <section class="panel">
+    <h2>Flow Chart</h2>
+    <p class="muted">
+      This page mirrors the screenshot structure at a high level. (The chart link is shown on all pages; it was not required in the working application but included.)
+    </p>
+
+    <div class="flow">
+      <div class="flow__node">VENDOR</div>
+      <div class="flow__node">Main Page</div>
+
+      <div class="flow__row">
+        <div class="flow__col">
+          <div class="flow__box">Your Item</div>
+          <a class="btn btn--soft" href="{{ url_for('vendor_item_new') }}">Insert</a>
+          <a class="btn btn--soft" href="{{ url_for('vendor_items') }}">Delete</a>
+        </div>
+
+        <div class="flow__col">
+          <div class="flow__box">Add New Item</div>
+          <a class="btn btn--soft" href="{{ url_for('vendor_product_status') }}">Product Status</a>
+          <a class="btn btn--soft" href="{{ url_for('vendor_request_item') }}">Request Item</a>
+          <a class="btn btn--soft" href="{{ url_for('vendor_view_product') }}">View Product</a>
+        </div>
+
+        <div class="flow__col">
+          <div class="flow__box">Transaction</div>
+          <a class="btn btn--soft" href="{{ url_for('transactions') }}">User Request</a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+

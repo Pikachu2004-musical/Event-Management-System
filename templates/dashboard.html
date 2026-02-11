@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% set title = "Dashboard" %}
+
+{% block content %}
+  <section class="panel">
+    <h2>Welcome</h2>
+    <p class="muted">
+      Use the menu to navigate. Access is role-based: <b>Admin</b> can access Maintenance, Reports, Transactions; <b>User</b> can access Reports and Transactions (no Maintenance).
+    </p>
+
+    <div class="grid">
+      <a class="tile" href="{{ url_for('vendor_main') }}">
+        <div class="tile__title">Vendor</div>
+        <div class="tile__desc">Items, product status, requests.</div>
+      </a>
+      <a class="tile" href="{{ url_for('transactions') }}">
+        <div class="tile__title">Transactions</div>
+        <div class="tile__desc">Requests and approvals.</div>
+      </a>
+      <a class="tile" href="{{ url_for('reports') }}">
+        <div class="tile__title">Reports</div>
+        <div class="tile__desc">Basic summaries.</div>
+      </a>
+      {% if g.user and g.user["role"] == "admin" %}
+        <a class="tile" href="{{ url_for('maintenance') }}">
+          <div class="tile__title">Maintenance</div>
+          <div class="tile__desc">Admin access only.</div>
+        </a>
+      {% endif %}
+      <a class="tile" href="{{ url_for('membership_add') }}">
+        <div class="tile__title">Add Membership</div>
+        <div class="tile__desc">Radio buttons (one selection).</div>
+      </a>
+      <a class="tile" href="{{ url_for('membership_update') }}">
+        <div class="tile__title">Update Membership</div>
+        <div class="tile__desc">Populate fields by membership number.</div>
+      </a>
+    </div>
+  </section>
+{% endblock %}
+
+

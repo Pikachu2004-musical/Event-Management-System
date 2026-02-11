@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% set title = "Update Membership" %}
+
+{% block content %}
+  <section class="panel">
+    <h2>Update Membership</h2>
+    <p class="muted">
+      Membership Number is mandatory; based on it the rest of fields are populated. User can extend or cancel membership. By default, six months extension is selected.
+    </p>
+
+    <form method="get" class="form">
+      <div class="form-grid">
+        <div class="muted">Select Membership</div>
+        <select name="id">
+          <option value="">-- Choose --</option>
+          {% for m in memberships %}
+            <option value="{{ m['id'] }}" {% if selected and selected['id'] == m['id'] %}selected{% endif %}>
+              {{ m["id"] }} - {{ m["member_name"] }} ({{ m["status"] }})
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-actions">
+        <a class="btn" href="{{ url_for('dashboard') }}">Back</a>
+        <button class="btn btn--primary" type="submit">Load</button>
+      </div>
+    </form>
+
+    <hr style="border:0;border-top:1px solid var(--border);margin:14px 0" />
+
+    <form method="post" class="form" novalidate>
+      <div class="form-grid">
+        <div class="muted">Membership Number *</div>
+        <input name="membership_id" type="number" min="1" step="1" value="{{ selected['id'] if selected else '' }}" placeholder="e.g., 1" />
+
+        <div class="muted">Member Name</div>
+        <input type="text" value="{{ selected['member_name'] if selected else '' }}" disabled />
+
+        <div class="muted">Current Plan</div>
+        <input type="text" value="{{ selected['plan_code'] if selected else '' }}" disabled />
+
+        <div class="muted">Current Status</div>
+        <input type="text" value="{{ selected['status'] if selected else '' }}" disabled />
+
+        <div class="muted">Action *</div>
+        <div class="radio-row">
+          <label class="inline-label"><input type="radio" name="action" value="extend" checked /> Extend</label>
+          <label class="inline-label"><input type="radio" name="action" value="cancel" /> Cancel</label>
+        </div>
+
+        <div class="muted">Extension Plan (Radio) *</div>
+        <div class="radio-row">
+          <label class="inline-label"><input type="radio" name="extend_plan" value="6m" checked /> +6 months</label>
+          <label class="inline-label"><input type="radio" name="extend_plan" value="1y" /> +1 year</label>
+          <label class="inline-label"><input type="radio" name="extend_plan" value="2y" /> +2 years</label>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn--primary" type="submit">Update</button>
+      </div>
+    </form>
+
+    <h2 style="margin-top:16px;">All Memberships</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Plan</th>
+          <th>Status</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in memberships %}
+          <tr>
+            <td>{{ m["id"] }}</td>
+            <td>{{ m["member_name"] }}</td>
+            <td>{{ m["plan_code"] }}</td>
+            <td>{{ m["status"] }}</td>
+            <td class="muted">{{ m["created_at"] }}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="5" class="muted">No memberships yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}
+
+

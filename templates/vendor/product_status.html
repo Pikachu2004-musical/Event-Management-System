@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% set title = "Vendor - Product Status" %}
+
+{% block content %}
+  <section class="panel">
+    <h2>Product Status</h2>
+    <form method="get" class="form">
+      <div class="form-grid">
+        <div class="muted">Filter</div>
+        <select name="status">
+          <option value="" {% if not status %}selected{% endif %}>All</option>
+          <option value="available" {% if status == "available" %}selected{% endif %}>Available</option>
+          <option value="unavailable" {% if status == "unavailable" %}selected{% endif %}>Unavailable</option>
+          <option value="pending" {% if status == "pending" %}selected{% endif %}>Pending</option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <a class="btn" href="{{ url_for('vendor_main') }}">Back</a>
+        <button class="btn btn--primary" type="submit">Apply</button>
+      </div>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Status</th>
+          <th>Active</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for it in items %}
+          <tr>
+            <td>{{ it["id"] }}</td>
+            <td>{{ it["name"] }}</td>
+            <td>{{ it["status"] }}</td>
+            <td>{{ "Yes" if it["is_active"] else "No" }}</td>
+            <td class="muted">{{ it["created_at"] }}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="5" class="muted">No matching items.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}
+
+

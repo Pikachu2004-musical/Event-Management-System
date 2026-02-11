@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% set title = "Maintenance - Create User" %}
+
+{% block content %}
+  <section class="panel">
+    <h2>Create User</h2>
+    <form method="post" class="form" novalidate>
+      <div class="form-grid">
+        <div class="muted">Username *</div>
+        <input name="username" type="text" placeholder="e.g., john" />
+
+        <div class="muted">Role *</div>
+        <div class="radio-row">
+          <label class="inline-label"><input type="radio" name="role" value="user" checked /> User</label>
+          <label class="inline-label"><input type="radio" name="role" value="admin" /> Admin</label>
+        </div>
+
+        <div class="muted">Password *</div>
+        <input name="password" type="password" placeholder="min 4 chars" />
+      </div>
+
+      <div class="form-actions">
+        <a class="btn" href="{{ url_for('maintenance') }}">Cancel</a>
+        <button class="btn btn--primary" type="submit">Create</button>
+      </div>
+    </form>
+  </section>
+{% endblock %}
+
+

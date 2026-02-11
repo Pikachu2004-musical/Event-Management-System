@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% set title = "Add Membership" %}
+
+{% block content %}
+  <section class="panel">
+    <h2>Add Membership</h2>
+    <p class="muted">
+      All fields mandatory and user must select one option: 6 months / 1 year / 2 years. By default, 6 months is selected.
+    </p>
+
+    <form method="post" class="form" novalidate>
+      <div class="form-grid">
+        <div class="muted">Member Name *</div>
+        <input name="member_name" type="text" placeholder="e.g., Alex" />
+
+        <div class="muted">Plan (Radio) *</div>
+        <div class="radio-row">
+          <label class="inline-label"><input type="radio" name="plan" value="6m" checked /> 6 months</label>
+          <label class="inline-label"><input type="radio" name="plan" value="1y" /> 1 year</label>
+          <label class="inline-label"><input type="radio" name="plan" value="2y" /> 2 years</label>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <a class="btn" href="{{ url_for('dashboard') }}">Cancel</a>
+        <button class="btn btn--primary" type="submit">Add</button>
+      </div>
+    </form>
+  </section>
+{% endblock %}
+
+

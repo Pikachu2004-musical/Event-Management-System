@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% set title = "Maintenance (Admin)" %}
+
+{% block content %}
+  <section class="panel">
+    <h2>Maintenance Menu (Admin access only)</h2>
+    <p class="muted">
+      Admin can access maintenance, reports and transactions. Users cannot access maintenance.
+    </p>
+
+    <div class="row-actions">
+      <a class="btn btn--primary" href="{{ url_for('maintenance_user_new') }}">Create User</a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in users %}
+          <tr>
+            <td>{{ u["id"] }}</td>
+            <td>{{ u["username"] }}</td>
+            <td>{{ u["role"] }}</td>
+            <td class="muted">{{ u["created_at"] }}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="4" class="muted">No users.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}
+
+

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% set title = "Reports" %}
+
+{% block content %}
+  <section class="panel">
+    <h2>Reports</h2>
+    <p class="muted">Basic reports (as required). Maintenance module exists to support Reports and Transactions.</p>
+
+    <div class="grid">
+      <div class="tile">
+        <div class="tile__title">Items by Status</div>
+        <div class="tile__desc">
+          {% for r in item_counts %}
+            <div><b>{{ r["status"] }}</b>: {{ r["count"] }}</div>
+          {% else %}
+            <div class="muted">No data.</div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="tile__title">Requests by Status</div>
+        <div class="tile__desc">
+          {% for r in req_counts %}
+            <div><b>{{ r["status"] }}</b>: {{ r["count"] }}</div>
+          {% else %}
+            <div class="muted">No data.</div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="tile__title">Quick Links</div>
+        <div class="tile__desc row-actions">
+          <a class="btn btn--soft" href="{{ url_for('vendor_items') }}">Items</a>
+          <a class="btn btn--soft" href="{{ url_for('transactions') }}">Transactions</a>
+        </div>
+      </div>
+    </div>
+
+    <h2 style="margin-top:16px;">Recent Requests</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Item</th>
+          <th>Requested By</th>
+          <th>Qty</th>
+          <th>Urgency</th>
+          <th>Status</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in recent_requests %}
+          <tr>
+            <td>{{ r["id"] }}</td>
+            <td>{{ r["item_name"] }}</td>
+            <td>{{ r["requested_by"] }}</td>
+            <td>{{ r["quantity"] }}</td>
+            <td>{{ r["urgency"] }}</td>
+            <td>{{ r["status"] }}</td>
+            <td class="muted">{{ r["created_at"] }}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="7" class="muted">No requests yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}
+
+

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% set title = "Transactions" %}
+
+{% block content %}
+  <section class="panel">
+    <h2>Transactions / Requests</h2>
+    <p class="muted">
+      Users can view requests. Admin can approve/reject (validations enforced server-side).
+    </p>
+
+    <div class="row-actions">
+      <a class="btn" href="{{ url_for('vendor_user_requests') }}">My Requests</a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Item</th>
+          <th>Requested By</th>
+          <th>Qty</th>
+          <th>Urgency</th>
+          <th>Status</th>
+          <th>Created</th>
+          <th>Admin Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in txns %}
+          <tr>
+            <td>{{ r["id"] }}</td>
+            <td>{{ r["item_name"] }}</td>
+            <td>{{ r["requested_by"] }}</td>
+            <td>{{ r["quantity"] }}</td>
+            <td>{{ r["urgency"] }}</td>
+            <td>{{ r["status"] }}</td>
+            <td class="muted">{{ r["created_at"] }}</td>
+            <td>
+              {% if g.user and g.user["role"] == "admin" %}
+                <form method="post" action="{{ url_for('txn_set_status', req_id=r['id']) }}" class="row-actions">
+                  <select name="status">
+                    <option value="pending" {% if r["status"] == "pending" %}selected{% endif %}>Pending</option>
+                    <option value="approved" {% if r["status"] == "approved" %}selected{% endif %}>Approved</option>
+                    <option value="rejected" {% if r["status"] == "rejected" %}selected{% endif %}>Rejected</option>
+                  </select>
+                  <button class="btn btn--primary" type="submit">Save</button>
+                </form>
+              {% else %}
+                <span class="muted">Admin only</span>
+              {% endif %}
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="8" class="muted">No transactions yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}
+
+

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% set title = "Vendor - Request Item" %}
+
+{% block content %}
+  <section class="panel">
+    <h2>Request Item</h2>
+    <form method="post" class="form" novalidate>
+      <div class="form-grid">
+        <div class="muted">Item *</div>
+        <select name="item_id">
+          <option value="">-- Select --</option>
+          {% for it in items %}
+            <option value="{{ it['id'] }}">{{ it["name"] }} ({{ it["status"] }})</option>
+          {% endfor %}
+        </select>
+
+        <div class="muted">Quantity *</div>
+        <input name="quantity" type="number" min="1" step="1" placeholder="e.g., 3" />
+
+        <div class="muted">Urgency (Radio) *</div>
+        <div class="radio-row">
+          <label class="inline-label"><input type="radio" name="urgency" value="low" checked /> Low</label>
+          <label class="inline-label"><input type="radio" name="urgency" value="medium" /> Medium</label>
+          <label class="inline-label"><input type="radio" name="urgency" value="high" /> High</label>
+        </div>
+
+        <div class="muted">Notes</div>
+        <textarea name="notes" placeholder="Optional"></textarea>
+      </div>
+
+      <div class="form-actions">
+        <a class="btn" href="{{ url_for('vendor_main') }}">Cancel</a>
+        <button class="btn btn--primary" type="submit">Submit Request</button>
+      </div>
+    </form>
+  </section>
+{% endblock %}
+
+

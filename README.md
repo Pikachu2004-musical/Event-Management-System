@@ -1,4 +1,4 @@
-## Event Management System (per uploaded screenshots)
+## Event Management System 
 
 This is a small **Flask + SQLite** web application that follows the uploaded flow/requirements:
 
